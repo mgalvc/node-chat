@@ -1,0 +1,23 @@
+version: '3'
+services: 
+    node_app:
+        build: ./server
+        volumes: 
+            - ./server:/usr/src/app
+        working_dir: /usr/src/app
+        tty: true
+        container_name: node_app
+        #command: nodemon index.js
+        ports: 
+            - 3000:3000
+    node_client:
+        build: ./client
+        volumes:
+            - ./client:/usr/src/app
+        working_dir: /usr/src/app
+        tty: true
+        container_name: node_client
+        ports:
+            - 8080:8080
+        links:
+            - node_app
